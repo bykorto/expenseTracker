@@ -1,0 +1,64 @@
+<!-- index.html -->
+ <!DOCTYPE html>
+ <html>
+    <head>
+        <title>Expense Tracker</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="full-screen">
+            <div class="nav-bar">
+                <div class="logo-box">
+                    <img src="/static/logo-my-money.png">
+                </div>
+                <div class="nav-bar-btn-box">
+                    <div class="nav-bar-expense-btn">
+                        <a class="nav-bar-btns" href="/api/transactions">Expenses</a>
+                    </div>
+                    <div class="nav-bar-analytics-btn-box">
+                        <a class="nav-bar-btns" href="https//localhost:8000/api/analytics">Analytics</a>
+                    </div>
+                </div>
+            </div>
+            <div class="expenses-main-screen">
+                <div class="expenses-header-section">
+                    <div class="expenses-header-text">
+                        <h1>All Expenses in</h1>
+                    </div>
+                    <div class="expenses-header-btn-box">
+                        <div class="expenses-header-btn"></div>
+                        <div class="expenses-header-btn"></div>
+                    </div>
+                </div>
+                <div class="expenses-filter-section">
+                    <div class="expenses-filter-header">
+                        <h1>Time Period:</h1>
+                    </div>
+                    <div class="expenses-filter-input">
+                        <select id="expenses-filter-month">MM</select>
+                    </div>
+                    <div class="expenses-filter-input">
+                        <select id="expenses-filter-years">YYYY</select>
+                    </div>
+                    <button onclick="loadExpenses()">Load Expenses</button>
+                </div>
+                <div class="expenses-table-section">
+                    <h1>All Expenses in Jan</h1>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>DATE</th>
+                                <th>AMOUNT</th>
+                                <th>VENDOR</th>
+                                <th>CATEGORY</th>
+                                <th>NOTES</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div id="expenses"></div>
+        <script src="script.js"></script>
+    </body>
+ </html>
