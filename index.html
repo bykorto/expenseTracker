@@ -7,51 +7,82 @@
     </head>
     <body>
         <div class="full-screen">
-            <div class="nav-bar">
+            <div class="navbar-box">
                 <div class="logo-box">
-                    <img src="/static/logo-my-money.png">
+                    <img src="/frontend/static/logo-my-money.png" class="logo">
                 </div>
-                <div class="nav-bar-btn-box">
-                    <div class="nav-bar-expense-btn">
-                        <a class="nav-bar-btns" href="/api/transactions">Expenses</a>
+                <div class="navbar-btn-box">
+                    <div class="navbar-btns">
+                        <a ckass="navbar-budget-btn" href="/api/budget">Budget</a>
                     </div>
-                    <div class="nav-bar-analytics-btn-box">
-                        <a class="nav-bar-btns" href="https//localhost:8000/api/analytics">Analytics</a>
+                    <div class="navbar-btns">
+                        <a class="navbar-analytics-btn" href="/api/analytics">Analytics</a>
+                    </div>
+                    <div class="navbar-btns">
+                        <a class="navbar-expense-btn" href="/api/transactions">Expenses</a>
+                    </div>
+                    <div class="navbar-btns">
+                        <a id="navbar-add-expense-btn">Add Expense</a>
+                    </div>
+                    <div class="add-expense-popup" id="add-expense-popup">
+                        <div class="popup-content">
+                           <div class="popup-header">
+                             <button id="close-popup">
+                                    <img src="/frontend/static/cross.png" class="popup-close-btn">
+                                </button>
+                            </div>
+                            <div class="add-expense-form-header">
+                                <h2>Add a New Expense</h2>
+                                <button class="upload-expense-pdf" id="upload-expense-pdf">Upload Bank Statement</button>
+                            </div>
+                            <form class="add-expense-form" id="add-expense-form">
+                                
+                                    <label for="date">Date</label>
+                                    <input type="date" id="expense-form-date" name="date" required>
+                                
+                                    <label for="amount">Amount</label>
+                                    <input type="number" id="expense-form-amount" name="amount" step="0.01" required>
+                                
+                                    <label for="category">Category</label>
+                                    <select id="expense-form-category" name="category" required></select>
+
+                                    <label for="vendor">Vendor</label>
+                                    <input type="text" id="expense-form-vendor" name="vendor" required>
+
+                                    <label for="notes">Notes</label>
+                                    <textarea type="text" id="expense-form-notes" name="notes" rows="3"></textarea>
+                            </form>
+                            <div class="form-btn-box">
+                                <button class="form-btn" type="submit">Submit Expense</button>
+                                <button class="form-btn" type="cancel">Cancel</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="expenses-main-screen">
-                <div class="expenses-header-section">
-                    <div class="expenses-header-text">
-                        <h1>All Expenses in</h1>
-                    </div>
-                    <div class="expenses-header-btn-box">
-                        <div class="expenses-header-btn"></div>
-                        <div class="expenses-header-btn"></div>
-                    </div>
+                <div class="expenses-header-text">
+                    <h1>All Expenses in</h1>
                 </div>
                 <div class="expenses-filter-section">
                     <div class="expenses-filter-header">
                         <h1>Time Period:</h1>
                     </div>
                     <div class="expenses-filter-input">
-                        <select id="expenses-filter-month">MM</select>
-                    </div>
-                    <div class="expenses-filter-input">
-                        <select id="expenses-filter-years">YYYY</select>
+                        <select class="expenses-filter" id="expenses-filter-month">MM</select>
+                        <select class="expenses-filter" id="expenses-filter-years">YYYY</select>
                     </div>
                     <button onclick="loadExpenses()">Load Expenses</button>
                 </div>
                 <div class="expenses-table-section">
-                    <h1>All Expenses in Jan</h1>
                     <table>
                         <thead>
-                            <tr>
-                                <th>DATE</th>
-                                <th>AMOUNT</th>
-                                <th>VENDOR</th>
-                                <th>CATEGORY</th>
-                                <th>NOTES</th>
+                            <tr class="expenses-table">
+                                <th class="table-date">DATE</th>
+                                <th class="table-amount">AMOUNT</th>
+                                <th class="table-vendor">VENDOR</th>
+                                <th class="table-category">CATEGORY</th>
+                                <th class="table-notes">NOTES</th>
                             </tr>
                         </thead>
                     </table>
@@ -60,5 +91,6 @@
         </div>
         <div id="expenses"></div>
         <script src="script.js"></script>
+        <script src="addExpenseScript.js"></script>
     </body>
  </html>
