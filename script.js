@@ -62,20 +62,60 @@ function displayExpenses(expenses, year, month) {
 function populateFilters() {
     const { year, month } = getCurrentMonthYear();
 
-    // Populate filters
+    // Populate filters & select current month/year
     const monthSelect = document.getElementById('expenses-filter-month');
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
     monthNames.forEach((name, index) => {
-        
-    })
+        const option = document.createElement('option');
+        option.value = index + 1;
+        option.textContent = name;
+        if (index + 1 === month) option.selected = true;
+        monthSelect.appendChild(option);
+    });
+
+    const yearSelect = document.getElementById('expenses-filter-years');
+    const startYear = year - 5;
+    const endYear = year + 1;
+
+    for (let y = startYear; y <= endYear; y++) {
+        const option = document.createElement('option');
+        option.value = y;
+        option.textContent = y;
+        if (y === year) option.selected = true;
+        yearSelect.appendChild(option);
+    }
+}
+
+// Populate category dropdown
+
+async function populateCategoryDropdown() {
+    const categorySelect = document.getElementById('expense-form-category');
+
+    try {
+        const response = await fetch('http://localhost:8000/api/categories');
+        const data = await response.json();
+
+        categorySelect.innerHTML = '';
+
+        data.categories.forEach(cat => {
+            const option = document.createElement('option');
+            option.value = cat;
+            option.textContent = cat;
+            categorySelect.appendChild(option);
+        });
+    } catch (error) {
+        console.error('Error loading categories', error);
+    }
 }
 
 // Load on bootup
 
-window.addEventListener('DOMContentLoaded', () => {
-    populateFilters();
-    const { year, month } = getCurrentMonthYear();
-    loadExpensesByMonth(year, month);
+window.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() {
+        populateFilters();
+        const { year, month } = getCurrentMonthYear();
+        loadExpensesByMonth(year, month);
+    }, 0);
 })
 
