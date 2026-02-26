@@ -19,7 +19,7 @@ openBtn.addEventListener('click', () => {
 async function populateCategoryDropdown() {
     const categorySelect = document.getElementById('expense-form-category');
     
-    const response = await fetch('https://localhost:8000/api/categories');
+    const response = await fetch('http://localhost:8000/api/categories');
     const categoryNames = await response.json();
 
     categorySelect.innerHTML = '';
@@ -55,3 +55,37 @@ popup.addEventListener('click', (e) => {
         closePopup();
     }
 })
+
+// Add a new expense
+
+async function addExpense() {
+    const form = document.getElementById('add-expense-form');
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault;
+
+        const formData = {
+            date: document.getElementById('expense-form-date').value,
+            amount: document.getElementById('expense-form-amount').value,
+            category: document.getElementById('expense-form-category').value,
+            vendor: document.getElementById('expense-form-vendor').value,
+            notes: document.getElementById('expense-form-notes').value
+        };
+        
+        console.log('Submitting: ', formData);
+
+        try {
+            const response = await fetch('http://localhost:8000/api/expense', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+        
+            if (response.ok) {
+
+            }
+        }
+    })
+}
